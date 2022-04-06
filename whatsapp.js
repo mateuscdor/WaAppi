@@ -21,6 +21,7 @@ const sessionsDir = (sessionId = '') => {
 }
 
 const isSessionExists = (sessionId) => {
+    console.log(sessions)
     return sessions.has(sessionId)
 }
 
