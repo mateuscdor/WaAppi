@@ -21,7 +21,7 @@ const sessionsDir = (sessionId = '') => {
 }
 
 const isSessionExists = (sessionId) => {
-    console.log(sessions)
+    // console.log(sessions)
     return sessions.has(sessionId)
 }
 
@@ -38,7 +38,7 @@ const shouldReconnect = (sessionId) => {
     if (attempts < maxRetries) {
         ++attempts
 
-        console.log('Reconnecting...', { attempts, sessionId })
+        // console.log('Reconnecting...', { attempts, sessionId })
         retries.set(sessionId, attempts)
 
         return true
@@ -215,6 +215,28 @@ const sendMessage = async (session, receiver, message) => {
     }
 }
 
+const sendBootomMessage = async (session, receiver, message) => {
+    try {
+        await delay(1000)
+        const templateButtons = [
+            {index: 1, urlButton: {displayText: '⭐ Star Baileys on GitHub!', url: 'https://github.com/adiwajshing/Baileys'}},
+            {index: 2, callButton: {displayText: 'Call me!', phoneNumber: '+1 (234) 5678-901'}},
+          ]
+          
+          const buttonMessage = {
+              image: {url: 'https://ecs7.tokopedia.net/img/kjjBfF/2021/2/2/ed3a549c-72c6-4f52-bbf1-b6e44da735b0.png'},
+              caption: "Hi it's button message",
+              footerText: 'Hello World',
+              templateButtons: templateButtons,
+              headerType: 4
+          }
+          
+        return session.sendMessage(receiver, buttonMessage)
+    } catch {
+        return Promise.reject(null) // eslint-disable-line prefer-promise-reject-errors
+    }
+}
+
 const formatPhone = (phone) => {
     if (phone.endsWith('@s.whatsapp.net')) {
         return phone
@@ -236,7 +258,7 @@ const formatGroup = (group) => {
 }
 
 const cleanup = () => {
-    console.log('Running cleanup before exit.')
+    // console.log('Running cleanup before exit.')
 
     sessions.forEach((session, sessionId) => {
         if (!session.isLegacy) {
@@ -277,6 +299,7 @@ export {
     getChatList,
     isExists,
     sendMessage,
+    sendBootomMessage,
     formatPhone,
     formatGroup,
     cleanup,

@@ -16,6 +16,7 @@ router.post(
     query('id').notEmpty(),
     body('receiver').notEmpty(),
     body('message').notEmpty(),
+    body('type').notEmpty(),
     requestValidator,
     sessionValidator,
     controller.send

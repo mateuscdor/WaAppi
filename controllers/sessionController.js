@@ -11,7 +11,6 @@ const find = (req, res) => {
 
 const add = (req, res) => {
     const { id, isLegacy } = req.body
-    // console.log(isSessionExists(id))
     if (isSessionExists(id)) {
         return response(res, 409, false, 'Session already exists, please use another id.')
     }
