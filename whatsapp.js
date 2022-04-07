@@ -236,6 +236,40 @@ const sendBootomMessage = async (session, receiver, message) => {
         return Promise.reject(null) // eslint-disable-line prefer-promise-reject-errors
     }
 }
+const sendListMessage = async (session, receiver, message) => {
+    try {
+        await delay(1000)
+       // send a list message!
+        const sections = [
+            {
+            title: "Section 1",
+            rows: [
+                {title: "Option 1", rowId: "option1"},
+                {title: "Option 2", rowId: "option2", description: "This is a description"}
+            ]
+            },
+        {
+            title: "Section 2",
+            rows: [
+                {title: "Option 3", rowId: "option3"},
+                {title: "Option 4", rowId: "option4", description: "This is a description V2"}
+            ]
+            },
+        ]
+
+        const listMessage = {
+        text: "This is a list",
+        footer: "nice footer, link: https://google.com",
+        title: "Amazing boldfaced list title",
+        buttonText: "Required, text on the button to view the list",
+        sections
+        }
+          
+        return session.sendMessage(receiver, listMessage)
+    } catch {
+        return Promise.reject(null) // eslint-disable-line prefer-promise-reject-errors
+    }
+}
 
 const formatPhone = (phone) => {
     if (phone.endsWith('@s.whatsapp.net')) {
@@ -300,6 +334,7 @@ export {
     isExists,
     sendMessage,
     sendBootomMessage,
+    sendListMessage,
     formatPhone,
     formatGroup,
     cleanup,
