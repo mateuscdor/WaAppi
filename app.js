@@ -14,7 +14,7 @@ app.use('/', routes)
 
 app.listen(port, () => {
     init()
-    console.log(`Server is listening`)
+    console.log(`Server is listening http://localhost:${port}`)
 })
 
 nodeCleanup(cleanup)
