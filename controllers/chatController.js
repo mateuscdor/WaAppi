@@ -1,4 +1,4 @@
-import { getSession, getChatList, isExists, sendMessage, formatPhone, sendBootomMessage } from './../whatsapp.js'
+import { getSession, getChatList, isExists, sendMessage, formatPhone, sendBootomMessage, sendFileMessage } from './../whatsapp.js'
 import response from './../response.js'
 
 const getList = (req, res) => {
@@ -9,6 +9,7 @@ const send = async (req, res) => {
     const session = getSession(res.locals.sessionId)
     const receiver = formatPhone(req.body.receiver)
     const { message } = req.body
+    const { file } = req.body
 
     try {
         const exists = await isExists(session, receiver)
@@ -18,6 +19,8 @@ const send = async (req, res) => {
         }
         if(req.body.type === "button" ){
             await sendBootomMessage(session, receiver, { text: message })
+        }else if(req.body.type === "file"){
+            await sendFileMessage(session, receiver, { file : file })
         }else{
             await sendMessage(session, receiver, { text: message })
         }

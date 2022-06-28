@@ -21,7 +21,6 @@ const sessionsDir = (sessionId = '') => {
 }
 
 const isSessionExists = (sessionId) => {
-    console.log(sessions.has(sessionId),'session')
     return sessions.has(sessionId)
 }
 
@@ -215,6 +214,22 @@ const sendMessage = async (session, receiver, message) => {
     }
 }
 
+const sendFileMessage = async (session, receiver, message) => {
+    try {
+        await delay(1000)
+        const templatePesan = {
+            document: {
+                url: message.file
+            },
+            message : message,
+            mimetype: 'application/pdf',
+            fileName: 'presentation-1.pdf',
+        }
+        return session.sendMessage(receiver, templatePesan)
+    } catch {
+        return Promise.reject(null) // eslint-disable-line prefer-promise-reject-errors
+    }
+}
 const sendBootomMessage = async (session, receiver, message) => {
     try {
         await delay(1000)
@@ -334,6 +349,7 @@ export {
     isExists,
     sendMessage,
     sendBootomMessage,
+    sendFileMessage,
     sendListMessage,
     formatPhone,
     formatGroup,
