@@ -219,12 +219,12 @@ const sendFileMessage = async (session, receiver, message) => {
         await delay(1000)
         const templatePesan = {
             document: {
-                url: message.file
+                url: message.file,
             },
-            message : message,
             mimetype: 'application/pdf',
-            fileName: 'presentation-1.pdf',
+            fileName: `${message.file_name}`,
         }
+
         return session.sendMessage(receiver, templatePesan)
     } catch {
         return Promise.reject(null) // eslint-disable-line prefer-promise-reject-errors
@@ -233,19 +233,11 @@ const sendFileMessage = async (session, receiver, message) => {
 const sendBootomMessage = async (session, receiver, message) => {
     try {
         await delay(1000)
-        const templateButtons = [
-            {index: 1, urlButton: {displayText: '⭐ Star Baileys on GitHub!', url: 'https://github.com/adiwajshing/Baileys'}},
-            {index: 2, callButton: {displayText: 'Call me!', phoneNumber: '+1 (234) 5678-901'}},
-          ]
-          
-          const buttonMessage = {
-              image: {url: 'https://ecs7.tokopedia.net/img/kjjBfF/2021/2/2/ed3a549c-72c6-4f52-bbf1-b6e44da735b0.png'},
-              caption: "Hi it's button message",
-              footerText: 'Hello World',
-              templateButtons: templateButtons,
-              headerType: 4
-          }
-          
+        const buttonMessage = {
+            image: { url: message.file },
+            caption: message.caption,
+        }
+
         return session.sendMessage(receiver, buttonMessage)
     } catch {
         return Promise.reject(null) // eslint-disable-line prefer-promise-reject-errors
@@ -254,32 +246,32 @@ const sendBootomMessage = async (session, receiver, message) => {
 const sendListMessage = async (session, receiver, message) => {
     try {
         await delay(1000)
-       // send a list message!
+        // send a list message!
         const sections = [
             {
-            title: "Section 1",
-            rows: [
-                {title: "Option 1", rowId: "option1"},
-                {title: "Option 2", rowId: "option2", description: "This is a description"}
-            ]
+                title: 'Section 1',
+                rows: [
+                    { title: 'Option 1', rowId: 'option1' },
+                    { title: 'Option 2', rowId: 'option2', description: 'This is a description' },
+                ],
             },
-        {
-            title: "Section 2",
-            rows: [
-                {title: "Option 3", rowId: "option3"},
-                {title: "Option 4", rowId: "option4", description: "This is a description V2"}
-            ]
+            {
+                title: 'Section 2',
+                rows: [
+                    { title: 'Option 3', rowId: 'option3' },
+                    { title: 'Option 4', rowId: 'option4', description: 'This is a description V2' },
+                ],
             },
         ]
 
         const listMessage = {
-        text: "This is a list",
-        footer: "nice footer, link: https://google.com",
-        title: "Amazing boldfaced list title",
-        buttonText: "Required, text on the button to view the list",
-        sections
+            text: 'This is a list',
+            footer: 'nice footer, link: https://google.com',
+            title: 'Amazing boldfaced list title',
+            buttonText: 'Required, text on the button to view the list',
+            sections,
         }
-          
+
         return session.sendMessage(receiver, listMessage)
     } catch {
         return Promise.reject(null) // eslint-disable-line prefer-promise-reject-errors

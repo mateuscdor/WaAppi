@@ -16,6 +16,7 @@ router.post(
     query('id').notEmpty(),
     body('receiver').notEmpty(),
     body('message'),
+    body('file_name'),
     body('type').notEmpty(),
     requestValidator,
     sessionValidator,
