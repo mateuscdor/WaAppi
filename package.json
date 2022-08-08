@@ -1,6 +1,6 @@
 {
-  "name": "baileys-api",
-  "description": "Simple RESTful WhatsApp API",
+  "name": "WaAppi",
+  "description": "WhatsApp API",
   "private": true,
   "main": "app.js",
   "type": "module",
@@ -9,13 +9,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ookamiiixd/baileys-api.git"
+    "url": "git+https://github.com/samsularifin05/WaAppi"
   },
-  "author": "ookamiiixd <ookamiiixd@gmail.com>",
+  "author": "samsularifin05",
   "bugs": {
     "url": "https://github.com/ookamiiixd/baileys-api/issues"
   },
-  "homepage": "https://github.com/ookamiiixd/baileys-api#readme",
+  "homepage": "https://github.com/samsularifin05/WaAppi#readme",
   "engines": {
     "node": ">=14.5.0"
   },
